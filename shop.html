@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BAKERY</title>
+  <style>
+    #Product, #icecream, #cakes1k, #cakes2k, #orderBox {
+      display: none;
+    }
+    button {
+      margin: 10px;
+      padding: 10px;
+      cursor: pointer;
+    }
+    img {
+      border-radius: 10px;
+    }
+    #total {
+      font-size: 20px;
+      font-weight: bold;
+      color: brown;
+    }
+    ul { list-style-type: none; padding: 0; }
+    li { margin: 5px 0; }
+    .removeBtn {
+      margin-left: 10px;
+      background: red;
+      color: white;
+      border: none;
+      padding: 5px 8px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+    <div id="container"></div>
+  <center><h1>WELCOME TO BAKERY</h1></center>
+  
+  <center>
+    <button>Home</button>
+    <button onclick="showProduct()">Product</button>
+    <button onmouseover="showAbout()">About</button>
+    <button onmouseover="showLocation()">Our Location</button>
+    <button>Blog</button>
+  </center>
+
+  
+  <div id="Product">
+    <button onclick="showicecream()">Ice cream <br><img src="icecrea.jpeg" alt="" width="200px" height="150px"></button>
+    <button onclick="showCakes()">Cakes <br><img src="juse.jpeg" alt="" width="200px" height="150px"></button>
+  </div>
+
+ 
+  <div id="icecream">
+    <center><h2>Ice Creams</h2></center> 
+    <button onclick="addItem('Vanilla',150)">Vanilla ₹150 <br><img src="icecream1.jpeg" alt="" width="200px" height="150px"></button>
+    <button onclick="addItem('Chocolate',180)">Chocolate ₹180 <br><img src="cho ice.jpeg" alt="" width="200px" height="150px"></button>
+    <button onclick="addItem('Strawberry',180)">Strawberry ₹180 <br><img src="staberry ice.jpeg" alt="" width="200px" height="150px"></button>
+    <button onclick="addItem('Mint',180)">Mint ₹180 <br><img src="icecream2.jpeg" alt="" width="200px" height="150px"></button>
+    <button onclick="addItem('Butter Pecan',200)">Butter pecan ₹200 <br><img src="ice cream4.jpeg" alt="" width="200px" height="150px"></button>
+  </div>
+  
+ 
+  <div id="cakes1k">
+      <center><h2>Cakes 1Kg</h2></center>
+      <button onclick="addItem('Chocolate Cake 1Kg',450)">Chocolate Cake ₹450 <br><img src="cake cho1.jpeg" alt="" width="200px" height="150px"></button>
+      <button onclick="addItem('Vanilla Cake 1Kg',380)">Vanilla Cake ₹380 <br><img src="cake vanilla.jpeg" alt=""  width="200px" height="150px"></button>
+      <button onclick="addItem('Strawberry Cake 1Kg', 480)">Strawberry Cake ₹480 <br><img src="cake sta1.jpeg" alt=""  width="200px" height="150px"></button>
+      <button onclick="addItem('Mango Cake 1Kg',900)">Mango Cake ₹900 <br><img src="cake 5.jpeg" alt=""  width="200px" height="150px"></button>
+  </div>
+
+ 
+  <div id="cakes2k">
+    <center><h2>5KG Cakes</h2></center>
+    <button onclick="addItem('Blackforest 5Kg',900)"> Blackforest ₹900 <br><img src="cake blackforest.jpeg" alt=""  width="200px" height="150px"></button>
+    <button onclick="addItem('Chocolate 5Kg',1200)">Chocolate ₹1200 <br><img src="cake cho5.jpeg" alt=""  width="200px" height="150px"></button>
+    <button onclick="addItem('Sweet Cake 5Kg',900)">Sweet Cake ₹900 <br><img src="cake 5c.jpeg" alt=""  width="200px" height="150px"></button>
+    <button onclick="addItem('Image Cake 5Kg',1200)">Image Cake ₹1200 <br><img src="cake image.jpeg" alt=""  width="200px" height="150px"></button>
+  </div>
+
+ 
+  <div id="orderBox">
+    <h2>Your Order</h2>
+    <ul id="orderList"></ul>
+    <p id="total">Total = 0 Rs</p>
+  </div>
+
+  <script>
+    let total = 0;
+    let order = [];
+
+    function showProduct() {
+      document.getElementById("Product").style.display = "block";
+    }
+
+    function showicecream() {
+      document.getElementById("icecream").style.display = "block";
+      document.getElementById("cakes1k").style.display = "none";
+      document.getElementById("cakes2k").style.display = "none";
+      document.getElementById("orderBox").style.display = "block";
+    }
+
+    function showCakes(){
+      document.getElementById("cakes1k").style.display = "block";
+      document.getElementById("cakes2k").style.display = "block";
+      document.getElementById("icecream").style.display = "none";
+      document.getElementById("orderBox").style.display = "block";
+    }
+
+    function addItem(name, price) {
+      order.push({ name, price });
+      total += price;
+      updateOrder();
+    }
+
+    function removeItem(index) {
+      let removed = order[index];
+      total -= removed.price;
+      alert(removed.name + " removed from your order!");
+      order.splice(index, 1);
+      updateOrder();
+    }
+
+    function updateOrder() {
+      let orderList = document.getElementById("orderList");
+      orderList.innerHTML = "";
+      order.forEach((item, index) => {
+        let li = document.createElement("li");
+        li.innerHTML = `${item.name} - ₹${item.price} 
+          <button class="removeBtn" onclick="removeItem(${index})">Remove</button>`;
+        orderList.appendChild(li);
+      });
+      document.getElementById("total").innerText = "Total = " + total + " Rs";
+    }
+
+    function showAbout() {
+        let aboud=document.createElement("p");
+        about.innerText="100%,pure,and offer ";
+        document.getElementById("container").appendChild(about)
+        
+      //alert("100%,pure,and offer ");
+    }
+
+    function showLocation() {
+        let location=document.createElement("p");
+        location.textContent="periyarNagar,Viruddhacalam,Junction Road";
+        document.getElementById("container").appendChild(location)
+
+
+      //alert("periyarNagar,Viruddhacalam,Junction Road");
+    }
+  </script>
+</body>
+</html>
